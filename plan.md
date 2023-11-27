@@ -8,3 +8,8 @@ Folgende Anforderungen werden an SimStamp gerichtet oder sind erwünschenswert:
 -Ein Benutzer sollte Projekte und die dazugehörigen Zeiten vom Vortag übernehmen können
 (- Cool wäre das wenn die Zeiterfassung ab dem Start von Teams erfolgt, sofern dieses Programm von alleine ab dem hochfahren des Laptops gestartet wird -)
 Wenn die Arbeitszeit die 40h Marke überschreitet bei einem Vollzeit Berufler, so soll die Stundenanzahl Rot markiert werden
+Ein weiteres Feature wäre das Tracken des Timers an sich über das Handy 
+Sollte man mal vergessen haben die Zeit rechzeitig zu tracken, kann man auch Manuell beim Start eines Timers die Uhrzeit eintragen. Sobald der User den Button drückt, soll die aktuelle Uhrzeit (evtl mit useRef) abgespeichert werden und nach der Nutzereingabe in Form einer Uhrzeit soll die bis dahin vergangene Zeit berechnet werden und dem Ausgewählten Tracker diese Anzahl von Stunden bzw Minuten draufaddieren.
+Jeder Timer ist auf 24h begrenzt sodass beim vergessen eines Timers keine konflikte entstehen (Tage entstehen) und der User sollte bei einem Tracking über 9h Arbeitszeit eine Meldung bekommen die in lediglich erinnert.
+
+projectData = [projectId [timePeriod:Time,[startStamp,endStamp]]];
