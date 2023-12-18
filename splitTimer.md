@@ -1,0 +1,1 @@
+Die Funktion setStamp setzt bei aufruf einen Zeitstempel. Der stopStamp wird erst gesetzt sobald ein neuer Timer angelegt wird in einem Array[1] timeRangeArray welches wiederum in ein currentTimer[] gepusht wird. Da somit currentTimer verändert wurde, wird useEffect erneut getriggert und befindet sich somit in einer Endlosschleife.

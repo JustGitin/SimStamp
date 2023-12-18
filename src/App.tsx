@@ -1,31 +1,22 @@
 import React from "react";
-import Navbar from "./navbar";
-import { TimerProps } from "./interface";
-import Timer from "./Timer";
-import { Minutes, Time } from "./typeDeclaration";
+import { Header } from "./components/header";
+import { Content } from "./components/content.tsx";
 
-const App: React.FunctionComponent<TimerProps> = () => {
-  const addTimer = (timePeriod: { h: Time; min: Minutes }) => {
-    //hier kann der bekommt der Timer die timePeriod übergeben und kann damit arbeiten
-    console.log("Timer added with time period:", timePeriod);
-  };
-
+function App() {
   return (
     <React.Fragment>
-      <Navbar />
-      <div className="mainContainer">
-        <div className="timer-container">
-          <Timer
-            onClick={(timePeriod: { h: Time; min: Minutes }) =>
-              addTimer(timePeriod)
-            } //hier wird beim drücken des Buttons die Komponente addTimer mit dem parameter timePeriod aufgerufen
-            projectTitle="Timer" //hier muss in zukunft ein Title als props übergeben werden
-            description="Füge einen Timer hinzu"
-          />
-        </div>
-      </div>
+      <Header />
+      <Content />
     </React.Fragment>
   );
-};
+}
 
 export default App;
+
+//nächtste Idee, ich brauche eine ID für jeden Timer und muss überprüfen ob bereits ein timer für das gewünschte projekt vorhanden ist. Wenn ja dann muss eine Fehlermeldung beim neu erstellen des Timers ausgegeben werden und auf den bereits vorhandenen Timer verwiesen werden. Wenn er jedoch nicht vorhanden ist, soll ein Neuer Timer erstellt werden der mit dem Projekt verknüpft ist( Die neu generierte ID könnte einfach die ProjektID sein)
+
+// onClick={(timePeriod: { h: Hours; min: Minutes }) =>
+//               //addTimer(timePeriod)
+//             } //hier wird beim drücken des Buttons die Komponente addTimer mit dem parameter timePeriod aufgerufen
+//             projectTitle="Timer" //hier muss in zukunft ein Title als props übergeben werden
+//             description="Füge einen Timer hinzu"

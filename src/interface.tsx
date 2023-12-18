@@ -1,7 +1,7 @@
-import { Minutes, Time } from "./typeDeclaration";
+import { Minutes, Hours } from "./typeDeclaration";
 
 export interface TimerProps {
-  onClick: (timePeriod: { h: Time; min: Minutes }) => void;
-  projectTitle: string;
-  description: string;
+  onClick: (timePeriod: { h: Hours; min: Minutes }) => void;
+  projectTitle: String;
+  description: String;
 }

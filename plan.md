@@ -13,3 +13,6 @@ Sollte man mal vergessen haben die Zeit rechzeitig zu tracken, kann man auch Man
 Jeder Timer ist auf 24h begrenzt sodass beim vergessen eines Timers keine konflikte entstehen (Tage entstehen) und der User sollte bei einem Tracking über 9h Arbeitszeit eine Meldung bekommen die in lediglich erinnert.
 
 projectData = [projectId [timePeriod:Time,[startStamp,endStamp]]];
+
+
+nächtste Idee: ich brauche eine ID für jeden Timer und muss überprüfen ob bereits ein timer für das gewünschte projekt vorhanden ist. Wenn ja dann muss eine Fehlermeldung beim neu erstellen des Timers ausgegeben werden und auf den bereits vorhandenen Timer verwiesen werden. Wenn er jedoch nicht vorhanden ist, soll ein Neuer Timer erstellt werden der mit dem Projekt verknüpft ist( Die neu generierte ID könnte einfach die ProjektID sein)
