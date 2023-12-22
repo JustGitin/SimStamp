@@ -1,0 +1,26 @@
+.navbar {
+  background-color: #2858c1;
+  height: 50px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navlist {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #727272;
+}
+
+.navlist li {
+  display: inline-block;
+}
+
+.navlist li a {
+  color: rgb(255, 255, 255);
+}
+
+.navlist li a :active {
+  color: orange;
+}

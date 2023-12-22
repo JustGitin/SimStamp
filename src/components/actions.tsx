@@ -1,18 +1,20 @@
 import { useState } from "react";
+import "./actions.css";
+import { StopButton } from "./stopButton.tsx";
+import { StartButton } from "./startButton.tsx";
+import { ResetButton } from "./resetButton.tsx";
 
-const [isRunning, setIsRunning] = useState(false);
+export const Actions = () => {
+  const [isRunning, setIsRunning] = useState(false);
 
-const startButton = () => {
-  setIsRunning(true);
-  return <button className="startButton"></button>;
-};
-
-const stopButton = () => {
-  setIsRunning(false);
-  return <button className="stopButton"></button>;
-};
-
-const resetTimer = () => {
-  //Logik des Buttons
-  return <button className="resetButton"></button>;
+  return (
+    <>
+      <div className="button-container">
+        <StopButton onStop={() => setIsRunning(false)} />
+        <StartButton onStart={() => setIsRunning(true)} />
+        <ResetButton onReset={() => setIsRunning(false)} />
+      </div>
+      {/* <p>State:{String(isRunning)}</p> */}
+    </>
+  );
 };

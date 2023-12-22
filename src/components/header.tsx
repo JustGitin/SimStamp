@@ -1,16 +1,23 @@
+import { Logo } from "./Logo";
+import { User } from "./User";
+import "./header.css";
+
 export function Header() {
   return (
     <>
-      <Logo />
-      <User />
+      <div className="navbar">
+        <Logo />
+        <ul className="navlist">
+          <li>
+            <a href="#hallo">Option 1</a>
+          </li>
+          <li>
+            <a href="#tschüss">Option 2</a>
+          </li>
+        </ul>
+
+        <User />
+      </div>
     </>
   );
 }
-
-function Logo() {
-  return <img className="formatLogo"></img>;
-}
-
-const User = () => {
-  return <p>User dummy vorübergehend</p>;
-};

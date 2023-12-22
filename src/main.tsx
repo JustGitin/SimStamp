@@ -2,13 +2,10 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App.tsx";
 import "./index.css";
+import "./App.css";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-    <App
-      onClick={() => console.log("Clicked")}
-      projectTitle="project title"
-      description="Project description"
-    />
+    <App />
   </React.StrictMode>
 );
