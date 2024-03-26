@@ -1,3 +1,5 @@
+import { Button } from "devextreme-react";
+
 interface StopButtonProps {
   onStop: () => void;
 }
@@ -7,8 +9,8 @@ export const StopButton: React.FC<StopButtonProps> = (props) => {
     props.onStop();
   };
   return (
-    <button className="buttonStyle" onClick={handleClick}>
+    <Button className="buttonStyle" onClick={handleClick}>
       Stop
-    </button>
+    </Button>
   );
 };

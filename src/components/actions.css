@@ -1,12 +1,12 @@
 .buttonStyle {
   background-color: #2858c1;
-  font-size: x-small;
   width: 50px;
   height: 20px;
   display: flex;
   align-items: center;
   justify-content: center;
   margin-right: 10px;
+  color: white;
 }
 
 .buttonStyle:active {

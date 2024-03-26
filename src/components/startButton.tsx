@@ -1,3 +1,5 @@
+import { Button } from "devextreme-react";
+
 interface StartButtonProps {
   onStart: () => void;
 }
@@ -7,8 +9,8 @@ export const StartButton: React.FC<StartButtonProps> = (props) => {
     props.onStart();
   };
   return (
-    <button className="buttonStyle" onClick={handleClick}>
+    <Button className="buttonStyle" onClick={handleClick}>
       Start
-    </button>
+    </Button>
   );
 };

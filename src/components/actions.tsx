@@ -3,6 +3,7 @@ import "./actions.css";
 import { StopButton } from "./stopButton.tsx";
 import { StartButton } from "./startButton.tsx";
 import { ResetButton } from "./resetButton.tsx";
+import { Button } from "devextreme-react/button";
 
 export const Actions = () => {
   const [isRunning, setIsRunning] = useState(false);
@@ -14,7 +15,9 @@ export const Actions = () => {
         <StartButton onStart={() => setIsRunning(true)} />
         <ResetButton onReset={() => setIsRunning(false)} />
       </div>
-      {/* <p>State:{String(isRunning)}</p> */}
+      <div style={{ color: "green", fontWeight: 400 }}>
+        isRunning:{String(isRunning)}
+      </div>
     </>
   );
 };

@@ -9,10 +9,10 @@ export function Header() {
         <Logo />
         <ul className="navlist">
           <li>
-            <a href="#hallo">Option 1</a>
+            <a href="#hallo">Tabellenansicht</a>
           </li>
           <li>
-            <a href="#tschüss">Option 2</a>
+            <a href="#tschüss">Notizen</a>
           </li>
         </ul>
 

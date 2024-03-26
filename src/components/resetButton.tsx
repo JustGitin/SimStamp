@@ -1,3 +1,5 @@
+import { Button } from "devextreme-react";
+
 interface ResetButtonProps {
   onReset: () => void;
 }
@@ -7,8 +9,8 @@ export const ResetButton: React.FC<ResetButtonProps> = (props) => {
     props.onReset();
   };
   return (
-    <button className="buttonStyle" onClick={handleClick}>
+    <Button className="buttonStyle" onClick={handleClick}>
       Reset
-    </button>
+    </Button>
   );
 };
