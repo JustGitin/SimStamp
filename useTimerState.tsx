@@ -2,7 +2,7 @@ import { useState } from "react";
 import { DateTime } from "luxon";
 
 export const useTimerState = () => {
-  const [startTime, setStartTime] = useState(null);
+  const [startTime, setStartTime] = useState(DateTime.now); //wird derzeit noch zu früh zugewiesen
   const [elapsedTime, setElapsedTime] = useState(0);
   const [timerInterval, setTimerInterval] = useState(null);
 
@@ -21,7 +21,8 @@ export const useTimerState = () => {
   const pushTimeData = () => {
     if (startTime) {
       const currentTime = DateTime.now();
-      const elapsedTimeValue = currentTime - startTime; //Kann man nicht minus rechnen
+      const elapsedTimeValue = currentTime.diff(startTime); //Kann man nicht minus rechnen
+      console.log(elapsedTimeValue);
       setElapsedTime(elapsedTimeValue);
     }
   };

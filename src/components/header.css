@@ -3,14 +3,15 @@
   height: 50px;
   display: flex;
   justify-content: space-between;
-  align-items: center;
 }
 
 .navlist {
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  background-color: #727272;
+  justify-content: center;
+  background-color: #2858c1;
+  padding: 0 10px;
+  gap: 15px;
 }
 
 .navlist li {
@@ -21,6 +22,6 @@
   color: rgb(255, 255, 255);
 }
 
-.navlist li a :active {
+.navlist li :active {
   color: orange;
 }
