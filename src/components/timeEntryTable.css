@@ -1,40 +1,17 @@
-.table-container {
-  background-color: rgb(230, 230, 230);
-}
-
-.timetable {
-  padding: 8px;
-}
-
-table {
-  border-collapse: collapse;
-  width: 80%;
-  table-layout: fixed;
-  margin-left: auto;
-}
-
-th,
-td {
-  color: #000000;
-  border: 1px solid #000000;
-  padding: 0.2px;
+.dx-datagrid-table {
+  border-collapse: separate;
+  border-spacing: 0;
+  border: 1px solid black;
+  float: left;
   text-align: center;
 }
-
-td {
-  font-size: small;
+.dx-datagrid-table tr:nth-child(even) {
+  background-color: #e6ebfe;
+  border-top: 1px solid black;
+  border-bottom: 1px solid black;
 }
 
-th {
-  background-color: #2858c1;
-  color: #ffffff;
-  font-weight: 400;
-}
-
-table tr:nth-child(even) {
-  background-color: #e1eaff;
-}
-
-table tr:nth-child(odd) {
-  background-color: #ffffff;
+.dx-datagrid {
+  padding: 0.7em 0.7em 1em 40em;
+  border: 1px solid rgb(255, 0, 0);
 }
