@@ -7,4 +7,4 @@ Ich will die option Tabellenansicht in der Navbar durch die option Monat ersetze
 
 *überschriften zentrieren
 *tabelle einheitlich färben
-*
+*sortieren des datums nicht nach Wochentag sondern nach  Datum

@@ -24,7 +24,7 @@ export const Timer: React.FC<MyTimerProps> = (props) => {
       return () => clearInterval(intervalId);
     };
 
-    fetchData();
+    return fetchData();
   }, [props.startStamp]); //erst nach erhalt des StartStamps wird das Interval aufgerufen
 
   useEffect(() => {
