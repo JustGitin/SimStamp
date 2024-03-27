@@ -41,7 +41,7 @@ export function Header() {
                 displayExpr="text"
                 value={dropdownValue}
                 onValueChanged={handleDropdownValueChanged}
-                width="160px"
+                width="150px"
               >
                 <div className="headerUser">
                   <span>User</span>

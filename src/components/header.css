@@ -25,3 +25,13 @@
 .navlist li :active {
   color: orange;
 }
+
+/* ------------------------------------------------------------- */
+.dropdown-menu li {
+  display: block;
+  background-color: #2858c1;
+}
+
+.dropdown-button {
+  background-color: white;
+}

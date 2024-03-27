@@ -1,8 +1,9 @@
 import DataGrid from "devextreme-react/data-grid";
-import { customers } from "./data";
 import "./timeEntryTable.css";
+import { timeEntries } from "./data.ts";
 
 const columns = [
+  "Datum",
   "Vergangene Zeit",
   "Start Uhrzeit",
   "End Uhrzeit",
@@ -12,9 +13,10 @@ const columns = [
 
 export const TimeEntryTable = () => (
   <DataGrid
-    dataSource={customers}
+    dataSource={timeEntries}
     keyExpr="ID"
     defaultColumns={columns}
     showBorders={true}
+    className="custom-datagrid"
   />
 );

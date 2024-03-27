@@ -2,14 +2,6 @@ import { useEffect, useState } from "react";
 import "./timer.css";
 import { DateTime, Duration } from "luxon";
 
-const ParentComponent = () => {
-  const getStartStamp = (): DateTime => {
-    return DateTime.now();
-  };
-};
-
-export default ParentComponent;
-
 interface MyTimerProps {
   startStamp: DateTime;
   onTimechanged: (currentTime: Duration) => void;
