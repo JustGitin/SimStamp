@@ -4,20 +4,24 @@ import { StopButton } from "./stopButton.tsx";
 import { StartButton } from "./startButton.tsx";
 import { ResetButton } from "./resetButton.tsx";
 import { DateTime, Duration } from "luxon";
-import { timeEntries } from "./data.ts";
+import { useTimeEntries } from "./data.ts";
 
 export const Actions = () => {
+  const { timeEntries, setTimeEntries } = useTimeEntries();
   const notes = "Hallo, ich bin eine Notiz";
   const projectName = "SimStamp";
 
   const [isRunning, setIsRunning] = useState(false);
   const [startStamp, setStartStamp] = useState<DateTime | null>(null);
-  const [stopStamp, setStopStamp] = useState<DateTime | null>(null);
   const [elapsedTime, setElapsedTime] = useState<Duration>(
     Duration.fromMillis(0)
   );
 
-  const formatStamps = (varToFormat: DateTime): string => {
+  const formatStamps = (varToFormat: DateTime | null): string => {
+    if (varToFormat === null) {
+      console.log("Invalid DateTime");
+      return "Invalid DateTime";
+    }
     return varToFormat.toFormat("HH:mm:ss");
   };
 
@@ -26,8 +30,6 @@ export const Actions = () => {
       "mm:ss"
     )}`;
   }
-  //Die idee ist ein Array mit allen Parametern welches mit einer forEach durchlaufen wird und jeden Eintrag in einen String formatiert,bevor der neue Eintrag erstellt wird
-  //ideal wäre das ausgrenzen der Strings um keine redundante Formatierung zu machen
 
   const calculateDifference = (stopStamp: DateTime, startStamp: DateTime) => {
     const difference = stopStamp.diff(startStamp);
@@ -52,7 +54,10 @@ export const Actions = () => {
       Projekt: projectName,
       Notizen: notes,
     };
-    timeEntries.push(newTimeEntry);
+    setTimeEntries([...timeEntries, newTimeEntry]);
+
+    alert("Eintrag wurde gemacht");
+    //Der Eintrag wird an dieser Stelle gemacht, jedoch muss sich auch die Tabelle aktualisieren unter verwendung vom State
   };
 
   return (
@@ -62,10 +67,9 @@ export const Actions = () => {
           onStop={() => {
             if (startStamp) {
               setIsRunning(false);
-              const now = DateTime.now();
-              setStopStamp(now);
-              calculateDifference(now, startStamp);
-              createNewEntry(startStamp, stopStamp!, projectName, notes); //ACHTUNG SCHUMMLEREI MIT !
+              const stopStamp = DateTime.now();
+              calculateDifference(stopStamp, startStamp);
+              createNewEntry(startStamp, stopStamp, projectName, notes);
             } else {
               console.log("startStamp is not defined");
             }
@@ -81,6 +85,9 @@ export const Actions = () => {
           onReset={() => {
             setIsRunning(false);
             setStartStamp(null);
+            alert(
+              "StartStamp wurde zurückgesetzt vorausgesetzt, du hast ihn noch nicht mit Stopp gespeichert"
+            );
           }}
         />
       </div>
@@ -90,5 +97,3 @@ export const Actions = () => {
     </>
   );
 };
-
-// bisher soll StopButton nur eine neue Zeile beginnen, das reseten ist in ResetButton umgesetzt

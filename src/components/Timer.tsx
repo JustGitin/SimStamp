@@ -19,7 +19,7 @@ export const Timer: React.FC<MyTimerProps> = (props) => {
         const now = DateTime.now(); //verhindert das abspeichern des alten Wertes bevor der neue gefetcht wurde
         const difference = now.diff(props.startStamp);
         setElapsedTime(difference); //falls undefined
-        props.onTimechanged(difference);
+        // props.onTimechanged(difference);
       }, 500);
       return () => clearInterval(intervalId);
     };

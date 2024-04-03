@@ -4,22 +4,18 @@ import "./content.css";
 import { Actions } from "./actions.tsx";
 import { Timer } from "./Timer.tsx";
 import { DateTime, Duration } from "luxon";
-import { useState } from "react";
 
 export const Content = () => {
-  const [currentTimeStamp, setCurrentTimestamp] = useState<Duration>();
+  //const [currentTimeStamp, setCurrentTimestamp] = useState<Duration>();
 
   const handleTimeChanged = (newDate: Duration) => {
-    setCurrentTimestamp(newDate); //wenn sich die zeit verändert hat
+    // setCurrentTimestamp(newDate); //wenn sich die zeit verändert hat
   };
   return (
     <>
       <TimeEntryTable />
       <Clock />
-      <Timer
-        startStamp={DateTime.now()}
-        onTimechanged={handleTimeChanged}
-      />{" "}
+      <Timer startStamp={DateTime.now()} onTimechanged={handleTimeChanged} />
       <Actions />
     </>
   );

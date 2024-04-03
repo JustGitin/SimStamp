@@ -10,7 +10,7 @@ export const StopButton: React.FC<StopButtonProps> = (props) => {
   };
   return (
     <Button className="buttonStyle" onClick={handleClick}>
-      Stop
+      Stopp
     </Button>
   );
 };
