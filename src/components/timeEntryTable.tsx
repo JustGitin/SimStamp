@@ -1,12 +1,15 @@
 import DataGrid, { Column } from "devextreme-react/data-grid";
 import "./timeEntryTable.css";
-import { useTimeEntries } from "./data.ts";
+import { TimeEntry } from "./data";
 
-export const TimeEntryTable = () => {
-  const { timeEntries } = useTimeEntries();
+interface TimeEntryTableProps {
+  timeEntries: TimeEntry[];
+}
+
+export const TimeEntryTable = (props: TimeEntryTableProps) => {
   return (
     <DataGrid
-      dataSource={timeEntries}
+      dataSource={props.timeEntries}
       keyExpr="ID"
       showBorders={true}
       className="custom-datagrid"

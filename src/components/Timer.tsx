@@ -4,7 +4,7 @@ import { DateTime, Duration } from "luxon";
 
 interface MyTimerProps {
   startStamp: DateTime;
-  onTimechanged: (currentTime: Duration) => void;
+  // onTimechanged: (currentTime: Duration) => void;
 }
 
 export const Timer: React.FC<MyTimerProps> = (props) => {

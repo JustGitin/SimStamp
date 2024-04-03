@@ -4,10 +4,14 @@ import { StopButton } from "./stopButton.tsx";
 import { StartButton } from "./startButton.tsx";
 import { ResetButton } from "./resetButton.tsx";
 import { DateTime, Duration } from "luxon";
-import { useTimeEntries } from "./data.ts";
+import { TimeEntry } from "./data.ts";
 
-export const Actions = () => {
-  const { timeEntries, setTimeEntries } = useTimeEntries();
+interface ActionProps {
+  onNewTimeEntry: (newTimeEntry: TimeEntry) => void;
+}
+
+export const Actions = (props: ActionProps) => {
+  //const { timeEntries, setTimeEntries } = useTimeEntries();
   const notes = "Hallo, ich bin eine Notiz";
   const projectName = "SimStamp";
 
@@ -43,10 +47,10 @@ export const Actions = () => {
   ) => {
     const now = DateTime.now(); //currentDate ist das Datum zum Zeitpunkt des Eintrags
     const currentDate: string = now.toISODate();
-    const newEntryID = timeEntries[timeEntries.length - 1].ID + 1;
+    //const newEntryID = timeEntries[timeEntries.length - 1].ID + 1;
 
-    let newTimeEntry = {
-      ID: newEntryID,
+    let newTimeEntry: TimeEntry = {
+      ID: 0,
       Datum: currentDate,
       VergangeneZeit: formatDuration(elapsedTime),
       StartUhrzeit: formatStamps(startStamp),
@@ -54,7 +58,9 @@ export const Actions = () => {
       Projekt: projectName,
       Notizen: notes,
     };
-    setTimeEntries([...timeEntries, newTimeEntry]);
+
+    props.onNewTimeEntry(newTimeEntry);
+    //setTimeEntries([...timeEntries, newTimeEntry]);
 
     alert("Eintrag wurde gemacht");
     //Der Eintrag wird an dieser Stelle gemacht, jedoch muss sich auch die Tabelle aktualisieren unter verwendung vom State

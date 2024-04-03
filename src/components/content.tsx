@@ -3,20 +3,28 @@ import { TimeEntryTable } from "./timeEntryTable.tsx";
 import "./content.css";
 import { Actions } from "./actions.tsx";
 import { Timer } from "./Timer.tsx";
-import { DateTime, Duration } from "luxon";
+import { DateTime } from "luxon";
+import { TimeEntry, dummyTimeEntries } from "./data.ts";
+import { useState } from "react";
 
 export const Content = () => {
-  //const [currentTimeStamp, setCurrentTimestamp] = useState<Duration>();
+  const [timeEntrieArray, setTimeEntrieArray] =
+    useState<TimeEntry[]>(dummyTimeEntries);
 
-  const handleTimeChanged = (newDate: Duration) => {
-    // setCurrentTimestamp(newDate); //wenn sich die zeit verändert hat
+  const onNewTimeEntry = (newTimeEntry: TimeEntry) => {
+    const newEntryID = timeEntrieArray[timeEntrieArray.length - 1].ID + 1;
+    newTimeEntry.ID = newEntryID;
+    setTimeEntrieArray([...timeEntrieArray, newTimeEntry]);
+    // TODO: Add new time entry to state
   };
+
   return (
     <>
-      <TimeEntryTable />
+      <TimeEntryTable timeEntries={timeEntrieArray} />
       <Clock />
-      <Timer startStamp={DateTime.now()} onTimechanged={handleTimeChanged} />
-      <Actions />
+      <Timer startStamp={DateTime.now()} />
+      {/* TODO: Define onNewTimeEntry in props of Actions component */}
+      <Actions onNewTimeEntry={onNewTimeEntry} />
     </>
   );
 };
