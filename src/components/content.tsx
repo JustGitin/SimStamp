@@ -8,24 +8,24 @@ import { TimeEntry, dummyTimeEntries } from "./data.ts";
 import { useState } from "react";
 
 export const Content = () => {
-  const [timeEntrieArray, setTimeEntrieArray] =
+  const [timeEntrieArray, setTimeEntrieArray] = //initialisiert die dummydaten zum timeEntryArray
     useState<TimeEntry[]>(dummyTimeEntries);
 
   const onNewTimeEntry = (newTimeEntry: TimeEntry) => {
     const newEntryID = timeEntrieArray[timeEntrieArray.length - 1].ID + 1;
-    newTimeEntry.ID = newEntryID;
-    setTimeEntrieArray([...timeEntrieArray, newTimeEntry]);
-    // TODO: Add new time entry to state
+    newTimeEntry.ID = newEntryID; //verhindert das ungewollte Zuweisen der alten ID
+    setTimeEntrieArray([...timeEntrieArray, newTimeEntry]); //erstellt eine Kopie vom Aktuellen timeEntrieArray und setzt den neuen Eintrag hinten dran
   };
-
+  //kann ich nicht einfach Actions in Tim
   return (
-    <>
+    <div className="content">
       <TimeEntryTable timeEntries={timeEntrieArray} />
-      <Clock />
-      <Timer startStamp={DateTime.now()} />
-      {/* TODO: Define onNewTimeEntry in props of Actions component */}
-      <Actions onNewTimeEntry={onNewTimeEntry} />
-    </>
+      <div className="bottomRow">
+        <Clock />
+        <Timer startStamp={DateTime.now()} />
+        <Actions onNewTimeEntry={onNewTimeEntry} />
+      </div>
+    </div>
   );
 };
 

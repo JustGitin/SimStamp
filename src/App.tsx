@@ -1,4 +1,4 @@
-import 'devextreme/dist/css/dx.light.css';
+import "devextreme/dist/css/dx.material.blue.light.css";
 import React from "react";
 import { Header } from "./components/header.tsx";
 import { Content } from "./components/content.tsx";

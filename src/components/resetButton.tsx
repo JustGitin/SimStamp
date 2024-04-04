@@ -9,8 +9,11 @@ export const ResetButton: React.FC<ResetButtonProps> = (props) => {
     props.onReset();
   };
   return (
-    <Button className="buttonStyle" onClick={handleClick}>
-      Reset
-    </Button>
+    <Button
+      className="buttonStyle"
+      onClick={handleClick}
+      text="Reset"
+      type="danger"
+    ></Button>
   );
 };

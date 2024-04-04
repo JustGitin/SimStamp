@@ -9,8 +9,11 @@ export const StartButton: React.FC<StartButtonProps> = (props) => {
     props.onStart();
   };
   return (
-    <Button className="buttonStyle" onClick={handleClick}>
-      Start
-    </Button>
+    <Button
+      className="buttonStyle"
+      onClick={handleClick}
+      text="Start"
+      type="default"
+    ></Button>
   );
 };

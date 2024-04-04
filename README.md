@@ -25,3 +25,17 @@ If you are developing a production application, we recommend updating the config
 - Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
 - Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
 - Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+
+
+## Ideas and features that are still open or do not currently work
+
+- Der Timer welcher die vergangene Zeit errechnet soll in der Tabelle in der untersten Spalte angezeigt werden und an dem Eintrag angebunden werden. Meine Idee wäre es diese vergangene Zeit an die newEntryID anzuhängen.
+- Dieser Timer hat funktioniert seit dem hinzufügen des States für die Tabelle nicht mehr ordnungsgemäß und zeigt durations wie 0:126:33 an (State ist nur die Vermutung)
+- Die Vergangene Zeit welche aus dem startStamp und dem stopStamp berechnet wird und anschließend in der Tabelle angezeigt wird eintspricht nicht der tatsächlich vergagenen Zeit(rechnet vielleicht mit dem zu beginn initialisierten Wert oder wird von einem anderen Stempel überschrieben)
+- Der Timer fängt direkt zu beginn des Ladens der Weboberfläche an hochzuzählen und sollte dies aber erst nach betätigen des Buttons tun
+- Das Datum ist noch kaufmänisch formatiert.
+- Die Tabelle soll für jeweils einen Tag ausgelegt werden und nicht nur ein Eintrag pro Tag
+- Auf der linken Seite der Tabelle soll die möglichkeit bestehen zwischen verschiedenen ansichten zu wechseln mithilfe von Filtermöglichkeiten der Dev Extreme Tabelle
+- Das Layout kann auf der Website angepasst werden
+- Der DropdowmButton sollte mit einem Icon und dem Namen des Nutzers ausgefüllt werden sodass die angemeldete Person sichtbar ist
+- Das DropdownMenü sollte die Tabelle nach links verschieben um sie nicht zu verdecken. 

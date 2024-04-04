@@ -15,7 +15,7 @@ export const Actions = (props: ActionProps) => {
   const notes = "Hallo, ich bin eine Notiz";
   const projectName = "SimStamp";
 
-  const [isRunning, setIsRunning] = useState(false);
+  // const [isRunning, setIsRunning] = useState(false);
   const [startStamp, setStartStamp] = useState<DateTime | null>(null);
   const [elapsedTime, setElapsedTime] = useState<Duration>(
     Duration.fromMillis(0)
@@ -49,7 +49,7 @@ export const Actions = (props: ActionProps) => {
     const currentDate: string = now.toISODate();
     //const newEntryID = timeEntries[timeEntries.length - 1].ID + 1;
 
-    let newTimeEntry: TimeEntry = {
+    const newTimeEntry: TimeEntry = {
       ID: 0,
       Datum: currentDate,
       VergangeneZeit: formatDuration(elapsedTime),
@@ -59,47 +59,42 @@ export const Actions = (props: ActionProps) => {
       Notizen: notes,
     };
 
-    props.onNewTimeEntry(newTimeEntry);
+    props.onNewTimeEntry(newTimeEntry); //erstellt den Eintrag mit der Funktion aus content
     //setTimeEntries([...timeEntries, newTimeEntry]);
 
-    alert("Eintrag wurde gemacht");
+    console.log("Eintrag wurde gemacht");
     //Der Eintrag wird an dieser Stelle gemacht, jedoch muss sich auch die Tabelle aktualisieren unter verwendung vom State
   };
 
   return (
-    <>
-      <div className="button-container">
-        <StopButton
-          onStop={() => {
-            if (startStamp) {
-              setIsRunning(false);
-              const stopStamp = DateTime.now();
-              calculateDifference(stopStamp, startStamp);
-              createNewEntry(startStamp, stopStamp, projectName, notes);
-            } else {
-              console.log("startStamp is not defined");
-            }
-          }}
-        />
-        <StartButton
-          onStart={() => {
-            setIsRunning(true);
-            setStartStamp(DateTime.now());
-          }}
-        />
-        <ResetButton
-          onReset={() => {
-            setIsRunning(false);
-            setStartStamp(null);
-            alert(
-              "StartStamp wurde zurückgesetzt vorausgesetzt, du hast ihn noch nicht mit Stopp gespeichert"
-            );
-          }}
-        />
-      </div>
-      <div style={{ color: "green", fontWeight: 400 }}>
-        isRunning:{String(isRunning)}
-      </div>
-    </>
+    <div id="button-container" className="button-container">
+      <StopButton
+        onStop={() => {
+          if (startStamp) {
+            // setIsRunning(false);
+            const stopStamp = DateTime.now();
+            calculateDifference(stopStamp, startStamp);
+            createNewEntry(startStamp, stopStamp, projectName, notes);
+          } else {
+            console.log("startStamp is not defined");
+          }
+        }}
+      />
+      <StartButton
+        onStart={() => {
+          // setIsRunning(true);
+          setStartStamp(DateTime.now());
+        }}
+      />
+      <ResetButton
+        onReset={() => {
+          // setIsRunning(false);
+          setStartStamp(null);
+          alert(
+            "StartStamp wurde zurückgesetzt vorausgesetzt, du hast ihn noch nicht mit Stopp gespeichert"
+          );
+        }}
+      />
+    </div>
   );
 };

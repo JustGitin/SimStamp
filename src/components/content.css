@@ -1,0 +1,11 @@
+.content {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.bottomRow {
+  display: flex;
+  justify-content: space-between;
+}
