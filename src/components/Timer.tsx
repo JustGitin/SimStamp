@@ -4,27 +4,25 @@ import { DateTime, Duration } from "luxon";
 
 interface MyTimerProps {
   startStamp: DateTime;
-  // onTimechanged: (currentTime: Duration) => void;
 }
 
 export const Timer: React.FC<MyTimerProps> = (props) => {
   const [elapsedTime, setElapsedTime] = useState<Duration>(
     Duration.fromMillis(0)
   );
-  const [displayElapsedTime, setDisplayElapsedTime] = useState<String>("0:0:0");
+  const [displayElapsedTime, setDisplayElapsedTime] = useState<string>("0:0:0");
 
   useEffect(() => {
     const fetchData = () => {
       const intervalId = setInterval(() => {
-        const now = DateTime.now(); //verhindert das abspeichern des alten Wertes bevor der neue gefetcht wurde
+        const now = DateTime.now();
         const difference = now.diff(props.startStamp);
         setElapsedTime(difference); //falls undefined
-        // props.onTimechanged(difference);
       }, 500);
       return () => clearInterval(intervalId);
     };
 
-    return fetchData();
+    return fetchData(); //kann ich aufrufen um die elapsedTime zu entnehmen!
   }, [props.startStamp]); //erst nach erhalt des StartStamps wird das Interval aufgerufen
 
   useEffect(() => {

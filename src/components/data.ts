@@ -64,7 +64,7 @@ export const dummyTimeEntries = [
   },
   {
     ID: 7,
-    Datum: "Sonntag, 2024-04-04",
+    Datum: "2024-04-04", //Dateobjekt oder ISO
     VergangeneZeit: "22:00",
     StartUhrzeit: "23:00",
     EndUhrzeit: "00:00",
