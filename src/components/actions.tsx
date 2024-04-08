@@ -6,16 +6,17 @@ import { ResetButton } from "./resetButton.tsx";
 import { DateTime, Duration } from "luxon";
 import { TimeEntry } from "./data.ts";
 
-interface ActionProps {
+export interface ActionProps {
   onNewTimeEntry: (newTimeEntry: TimeEntry) => void;
+  startStamp: DateTime; //benötigt sie vom StartButton
 }
 
 export const Actions = (props: ActionProps) => {
-  //const { timeEntries, setTimeEntries } = useTimeEntries();
   const notes = "Hallo, ich bin eine Notiz";
   const projectName = "SimStamp";
 
   // const [isRunning, setIsRunning] = useState(false);
+  const [displayElapsedTime, setDisplayElapsedTime] = useState<string>("0:0:0");
   const [startStamp, setStartStamp] = useState<DateTime | null>(null);
   const [elapsedTime, setElapsedTime] = useState<Duration>(
     Duration.fromMillis(0)
@@ -29,17 +30,37 @@ export const Actions = (props: ActionProps) => {
     return varToFormat.toFormat("HH:mm:ss");
   };
 
+  //_____________________________________________________________________________________________________
+
+  const startTimer = (startStamp: DateTime, isRunning: boolean) => {
+    const intervalId = setInterval(() => {
+      const now = DateTime.now();
+      const stampDifference = now.diff(startStamp);
+      setElapsedTime(stampDifference);
+      setDisplayElapsedTime(formatDuration(stampDifference));
+    }, 500);
+
+    if (!isRunning) {
+      clearInterval(intervalId);
+    }
+    return () => clearInterval(intervalId);
+  };
+
   function formatDuration(elapsedTime: Duration): string {
-    return `${Math.floor(elapsedTime.as("hours"))}:${elapsedTime.toFormat(
-      "mm:ss"
-    )}`;
+    const hours = elapsedTime
+      .shiftTo("hours")
+      .hours.toFixed(0)
+      .padStart(2, "0");
+    const minutes = elapsedTime.minutes.toFixed(0).padStart(2, "0");
+    const seconds = elapsedTime.seconds.toFixed(0).padStart(2, "0");
+
+    return `${hours}:${minutes}:${seconds}`;
   }
 
-  const calculateDifference = (stopStamp: DateTime, startStamp: DateTime) => {
-    const difference = stopStamp.diff(startStamp);
-    setElapsedTime(difference);
-  };
+  //_______________________________________________________________________________________________________________
+
   const createNewEntry = (
+    displayElapsedTime: string,
     startStamp: DateTime,
     stopStamp: DateTime,
     projectName: string,
@@ -52,7 +73,7 @@ export const Actions = (props: ActionProps) => {
     const newTimeEntry: TimeEntry = {
       ID: 0,
       Datum: currentDate,
-      VergangeneZeit: formatDuration(elapsedTime),
+      VergangeneZeit: displayElapsedTime,
       StartUhrzeit: formatStamps(startStamp),
       EndUhrzeit: formatStamps(stopStamp),
       Projekt: projectName,
@@ -67,14 +88,23 @@ export const Actions = (props: ActionProps) => {
   };
 
   return (
-    <div id="button-container" className="button-container">
+    <div className="button-container">
       <StopButton
         onStop={() => {
           if (startStamp) {
             // setIsRunning(false);
             const stopStamp = DateTime.now();
-            calculateDifference(stopStamp, startStamp);
-            createNewEntry(startStamp, stopStamp, projectName, notes);
+            const difference = stopStamp.diff(startStamp);
+            setElapsedTime(difference);
+            setDisplayElapsedTime(formatDuration(difference));
+
+            createNewEntry(
+              displayElapsedTime,
+              startStamp,
+              stopStamp,
+              projectName,
+              notes
+            );
           } else {
             console.log("startStamp is not defined");
           }
@@ -84,11 +114,11 @@ export const Actions = (props: ActionProps) => {
         onStart={() => {
           // setIsRunning(true);
           setStartStamp(DateTime.now());
+          startTimer(startStamp, true);
         }}
       />
       <ResetButton
         onReset={() => {
-          // setIsRunning(false);
           setStartStamp(null);
           alert(
             "StartStamp wurde zurückgesetzt vorausgesetzt, du hast ihn noch nicht mit Stopp gespeichert"

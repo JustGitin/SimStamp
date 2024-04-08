@@ -38,4 +38,10 @@ If you are developing a production application, we recommend updating the config
 - Auf der linken Seite der Tabelle soll die möglichkeit bestehen zwischen verschiedenen ansichten zu wechseln mithilfe von Filtermöglichkeiten der Dev Extreme Tabelle
 - Das Layout kann auf der Website angepasst werden
 - Der DropdowmButton sollte mit einem Icon und dem Namen des Nutzers ausgefüllt werden sodass die angemeldete Person sichtbar ist
-- Das DropdownMenü sollte die Tabelle nach links verschieben um sie nicht zu verdecken. 
+- Das DropdownMenü sollte die Tabelle nach links verschieben um sie nicht zu verdecken.
+
+## Ideas for changes
+- Der Eintrag soll schon beim Starten gemacht werden, jedoch wird hier noch kein StopStamp angezeigt sondern ein "waiting for submission", welcher beim stoppen nachgetragen wird. 
+- Der Timer soll in der Spalte "Vergangene Zeit" nach anklicken des Startbuttons hochzählen und beim Stoppen einen Staatischen Eintrag hinterlassen. 
+- Zeiten sollten auch zwischen den Einträgen getrackt werden bzw beim stoppen soll der nächste Timer bereits beginnen zu laufen
+   

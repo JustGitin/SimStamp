@@ -3,15 +3,6 @@
 }
 
 .dx-datagrid {
-  padding: 0.7em 0.7em 1em 25em;
+  padding: 0.7em;
   border: 1px solid rgb(0, 0, 0);
-}
-
-/* .custom-datagrid .dx-datagrid-rowsview,
-.custom-datagrid .dx-datagrid-headers {
-  border: 2px solid black; /* Schwarzer Rahmen um die Tabelle */
-} */
-.custom-datagrid .dx-datagrid-rowsview {
-  border: 2px solid black; /* Schwarzer Rahmen um die Tabelle */
-  margin-top: -2px; /* Den oberen Rand nach oben verschieben, um die Linie zu überdecken */
 }

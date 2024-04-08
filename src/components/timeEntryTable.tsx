@@ -22,7 +22,7 @@ export const TimeEntryTable = (props: TimeEntryTableProps) => {
         height="600px" // Hier die gewünschte Höhe einstellen
       >
         <SearchPanel visible={true} width={240} placeholder="Search..." />
-        <Column dataField="Datum" /*caption=""*/>
+        <Column dataField="Datum" /*caption=""*/ dataType="date">
           <RequiredRule />
         </Column>
         <Column dataField="VergangeneZeit">
@@ -50,3 +50,7 @@ export const TimeEntryTable = (props: TimeEntryTableProps) => {
     </div>
   );
 };
+
+// cellRender={(newTimeEntry) => (
+//   <Timer timerValue={newTimeEntry.VergangeneZeit} /> //auf diese Weise müsste in newTimeEntry schon die aktuelle Zeit enthalten sein, der Eintrag wird jedoch erst nach dem betätigen des Stopbuttons getätigt
+// )}
