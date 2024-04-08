@@ -10,7 +10,7 @@ export interface TimeEntry {
 export const dummyTimeEntries = [
   {
     ID: 1,
-    Datum: "Montag, 2024-03-29",
+    Datum: "2024-03-29",
     VergangeneZeit: "10:00",
     StartUhrzeit: "11:00",
     EndUhrzeit: "12:00",
@@ -19,7 +19,7 @@ export const dummyTimeEntries = [
   },
   {
     ID: 2,
-    Datum: "Dienstag, 2024-03-30",
+    Datum: "2024-03-30",
     VergangeneZeit: "12:00",
     StartUhrzeit: "13:00",
     EndUhrzeit: "14:00",
@@ -28,7 +28,7 @@ export const dummyTimeEntries = [
   },
   {
     ID: 3,
-    Datum: "Mittwoch, 2024-03-31",
+    Datum: "2024-03-31",
     VergangeneZeit: "14:00",
     StartUhrzeit: "15:00",
     EndUhrzeit: "16:00",
@@ -37,7 +37,7 @@ export const dummyTimeEntries = [
   },
   {
     ID: 4,
-    Datum: "Donnerstag, 2024-04-01",
+    Datum: "2024-04-01",
     VergangeneZeit: "16:00",
     StartUhrzeit: "17:00",
     EndUhrzeit: "18:00",
@@ -46,7 +46,7 @@ export const dummyTimeEntries = [
   },
   {
     ID: 5,
-    Datum: "Freitag, 2024-04-02",
+    Datum: "2024-04-02",
     VergangeneZeit: "18:00",
     StartUhrzeit: "19:00",
     EndUhrzeit: "20:00",
@@ -55,7 +55,7 @@ export const dummyTimeEntries = [
   },
   {
     ID: 6,
-    Datum: "Samstag, 2024-04-03",
+    Datum: "2024-04-03",
     VergangeneZeit: "20:00",
     StartUhrzeit: "21:00",
     EndUhrzeit: "22:00",
@@ -64,7 +64,7 @@ export const dummyTimeEntries = [
   },
   {
     ID: 7,
-    Datum: "Sonntag, 2024-04-04",
+    Datum: "2024-04-04",
     VergangeneZeit: "22:00",
     StartUhrzeit: "23:00",
     EndUhrzeit: "00:00",
