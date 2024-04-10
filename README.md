@@ -45,3 +45,5 @@ If you are developing a production application, we recommend updating the config
 - Der Timer soll in der Spalte "Vergangene Zeit" nach anklicken des Startbuttons hochzählen und beim Stoppen einen Staatischen Eintrag hinterlassen. 
 - Zeiten sollten auch zwischen den Einträgen getrackt werden bzw beim stoppen soll der nächste Timer bereits beginnen zu laufen
    
+
+Zeitenkonto das plus und minus Stunden trackt und diese ebenfalls ausgibt, sodass man angeben kannn wie viele stunden am Tag oder in der Woche man arbeiten möchte und wie viel man tatsächlich noch offen hat
