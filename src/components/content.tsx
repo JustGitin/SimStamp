@@ -2,7 +2,7 @@ import { Clock } from "./Clock.tsx";
 import { TimeEntryTable } from "./timeEntryTable.tsx";
 import "./content.css";
 import { Actions } from "./actions.tsx";
-import { TimeEntry, dummyTimeEntries } from "./data.ts";
+import { TimeEntry, dummyTimeEntries } from "./dummyEntries.ts";
 import { useState } from "react";
 
 export const Content = () => {

@@ -32,13 +32,6 @@ If you are developing a production application, we recommend updating the config
 - Der Timer welcher die vergangene Zeit errechnet soll in der Tabelle in der untersten Spalte angezeigt werden und an dem Eintrag angebunden werden. Meine Idee wäre es diese vergangene Zeit an die newEntryID anzuhängen.
 - Dieser Timer hat funktioniert seit dem hinzufügen des States für die Tabelle nicht mehr ordnungsgemäß und zeigt durations wie 0:126:33 an (State ist nur die Vermutung)
 - Die Vergangene Zeit welche aus dem startStamp und dem stopStamp berechnet wird und anschließend in der Tabelle angezeigt wird eintspricht nicht der tatsächlich vergagenen Zeit(rechnet vielleicht mit dem zu beginn initialisierten Wert oder wird von einem anderen Stempel überschrieben)
-- Der Timer fängt direkt zu beginn des Ladens der Weboberfläche an hochzuzählen und sollte dies aber erst nach betätigen des Buttons tun
-- Das Datum ist noch kaufmänisch formatiert.
-- Die Tabelle soll für jeweils einen Tag ausgelegt werden und nicht nur ein Eintrag pro Tag
-- Auf der linken Seite der Tabelle soll die möglichkeit bestehen zwischen verschiedenen ansichten zu wechseln mithilfe von Filtermöglichkeiten der Dev Extreme Tabelle
-- Das Layout kann auf der Website angepasst werden
-- Der DropdowmButton sollte mit einem Icon und dem Namen des Nutzers ausgefüllt werden sodass die angemeldete Person sichtbar ist
-- Das DropdownMenü sollte die Tabelle nach links verschieben um sie nicht zu verdecken.
 
 ## Ideas for changes
 - Der Eintrag soll schon beim Starten gemacht werden, jedoch wird hier noch kein StopStamp angezeigt sondern ein "waiting for submission", welcher beim stoppen nachgetragen wird. 
@@ -47,3 +40,9 @@ If you are developing a production application, we recommend updating the config
    
 
 Zeitenkonto das plus und minus Stunden trackt und diese ebenfalls ausgibt, sodass man angeben kannn wie viele stunden am Tag oder in der Woche man arbeiten möchte und wie viel man tatsächlich noch offen hat
+
+Wenn ich nach der Vergangenen Zeit filtern möchte, werden mir nur die Millisekunden angezeigt bzw. die formatierung greift nicht
+Nachtragen der Zeiteinträge berechnet nicht die vergangene Zeit sondern lässt beliebige Millisekundenwerte eintragen
+Filter müssen eingegrenzt werden da man bei der StartUhrzeit auch das Datum auswählen kann was separat angezeigt wird
+Sobald ein Eintrag gemacht wurde, soll die Tabelle zu diesem Eintrag springen
+Zeiten werden nach Datum welches angegängt ist sortiert

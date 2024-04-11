@@ -9,14 +9,21 @@ import DataGrid, {
   TotalItem,
 } from "devextreme-react/data-grid";
 import "./timeEntryTable.css";
-import { TimeEntry } from "./data"; //ist nur das interface
-import { Duration } from "luxon";
+import { TimeEntry } from "./dummyEntries"; //ist nur das interface
+import { DateTime, Duration } from "luxon";
 
 interface TimeEntryTableProps {
   timeEntries: TimeEntry[];
 }
 
 export const TimeEntryTable = (props: TimeEntryTableProps) => {
+  const calculateCellValue = (rowData: TimeEntry) => {
+    const stopStamp = DateTime.fromISO(rowData.EndUhrzeit).toMillis();
+    const startStamp = DateTime.fromISO(rowData.StartUhrzeit).toMillis();
+    const difference = stopStamp - startStamp;
+    //new Date(rowData.EndUhrzeit).getTime(); //Standard Javascript
+    return difference;
+  };
   function formatDuration(milliseconds: number): string {
     const duration = Duration.fromMillis(milliseconds);
     const formattedDuration = duration.toFormat("hh:mm:ss"); // darf nicht zum String, muss Zwischenfromatiert werden
@@ -38,17 +45,32 @@ export const TimeEntryTable = (props: TimeEntryTableProps) => {
           <RequiredRule />
         </Column>
         <Column
-          dataField="VergangeneZeit"
+          caption="Vergangene Zeit"
           dataType="number"
-          cellRender={(data) => formatDuration(data.value)}
           alignment="center"
+          calculateCellValue={calculateCellValue}
+          cellRender={(data) => formatDuration(data.value)}
         >
           <RequiredRule />
         </Column>
-        <Column dataField="StartUhrzeit" dataType="datetime" alignment="center">
+        <Column
+          dataField="StartUhrzeit"
+          dataType="datetime"
+          alignment="center"
+          cellRender={(data) =>
+            DateTime.fromJSDate(data.value).toFormat("HH:mm")
+          }
+        >
           <RequiredRule />
         </Column>
-        <Column dataField="EndUhrzeit" dataType="datetime" alignment="center">
+        <Column
+          dataField="EndUhrzeit"
+          dataType="datetime"
+          alignment="center"
+          cellRender={(data) =>
+            DateTime.fromJSDate(data.value).toFormat("HH:mm")
+          }
+        >
           <RequiredRule />
         </Column>
         <Column dataField="Projekt" alignment="center">

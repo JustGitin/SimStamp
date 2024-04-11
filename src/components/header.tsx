@@ -1,6 +1,6 @@
 import "./header.css";
 import { Logo } from "./Logo";
-import { DropDownMenu } from "./DropdownMenu";
+import { DropdownMenu } from "./DropdownMenu";
 
 export function Header() {
   return (
@@ -13,7 +13,7 @@ export function Header() {
           </li>
           <li>
             <div className="dropdown-button">
-              <DropDownMenu />
+              <DropdownMenu />
             </div>
           </li>
         </ul>

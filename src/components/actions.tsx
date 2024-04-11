@@ -4,7 +4,7 @@ import { StopButton } from "./stopButton.tsx";
 import { StartButton } from "./startButton.tsx";
 import { ResetButton } from "./resetButton.tsx";
 import { DateTime, Duration } from "luxon";
-import { TimeEntry } from "./data.ts";
+import { TimeEntry } from "./dummyEntries.ts";
 
 export interface ActionProps {
   onNewTimeEntry: (newTimeEntry: TimeEntry) => void;
@@ -73,6 +73,14 @@ export const Actions = (props: ActionProps) => {
 
   return (
     <div className="button-container">
+      <StartButton
+        onStart={() => {
+          setStartStamp(DateTime.now());
+          setTimerIsRunning(true);
+          //startTimer(DateTime.now(), true);
+        }}
+      />
+
       <StopButton
         onStop={() => {
           if (startStamp && timerIsRunning) {
@@ -85,18 +93,12 @@ export const Actions = (props: ActionProps) => {
             createNewEntry(newTime, startStamp, stopStamp, projectName, notes);
           } else {
             alert(
-              "Der Timer kann ohne das starten des Timers nicht beendet werden"
+              "Der Timer kann ohne das Starten des Timers nicht beendet werden"
             );
           }
         }}
       />
-      <StartButton
-        onStart={() => {
-          setStartStamp(DateTime.now());
-          setTimerIsRunning(true);
-          //startTimer(DateTime.now(), true);
-        }}
-      />
+
       <ResetButton
         onReset={() => {
           setStartStamp(null);
