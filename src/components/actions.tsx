@@ -1,51 +1,27 @@
-import { useEffect, useState } from "react";
 import "./actions.css";
 import { StopButton } from "./stopButton.tsx";
 import { StartButton } from "./startButton.tsx";
 import { ResetButton } from "./resetButton.tsx";
-import { DateTime, Duration } from "luxon";
+import { DateTime } from "luxon";
 import { TimeEntry } from "./dummyEntries.ts";
+import { Timer } from "./Timer.tsx";
 
 export interface ActionProps {
   onNewTimeEntry: (newTimeEntry: TimeEntry) => void;
+  // startTimer: () => void;
+  // stopTimer: () => void;
+  // resetTimer: () => void;
 }
 
 export const Actions = (props: ActionProps) => {
   const notes = "Hallo, ich bin eine Notiz";
   const projectName = "SimStamp";
 
-  const [timerIsRunning, setTimerIsRunning] = useState(false);
-  const [displayElapsedTime, setDisplayElapsedTime] = useState<string>("0:0:0");
-  const [startStamp, setStartStamp] = useState<DateTime | null>(null);
-  const [elapsedTimeMillisec, setElapsedTimeMillisec] = useState<number>(0);
-
-  //___________________________________________________________________________________________________
-  const startTimer = (startStamp: DateTime, timerIsRunning: boolean) => {
-    const intervalId = setInterval(() => {
-      const now = DateTime.now();
-      const stampDifference: Duration = now.diff(startStamp);
-      const newTimeMilisec = stampDifference.valueOf();
-      setElapsedTimeMillisec(newTimeMilisec);
-      setDisplayElapsedTime(formatDuration(newTimeMilisec));
-      const test = displayElapsedTime;
-      console.log(test);
-    }, 500);
-
-    if (!timerIsRunning) {
-      clearInterval(intervalId);
-    }
-    return () => clearInterval(intervalId);
-  };
-  useEffect(() => {
-    setDisplayElapsedTime(formatDuration(elapsedTimeMillisec));
-  }, [elapsedTimeMillisec]);
-
-  function formatDuration(milliseconds: number): string {
-    const duration = Duration.fromMillis(milliseconds);
-    const formattedDuration = duration.toFormat("hh:mm:ss");
-    return formattedDuration;
-  }
-  //_______________________________________________________________________________________________________
+  // function formatDuration(milliseconds: number): string {
+  //   const duration = Duration.fromMillis(milliseconds);
+  //   const formattedDuration = duration.toFormat("hh:mm:ss");
+  //   return formattedDuration;
+  // }
 
   const createNewEntry = (
     displayElapsedTime: number,
@@ -72,41 +48,19 @@ export const Actions = (props: ActionProps) => {
   };
 
   return (
+    
     <div className="button-container">
-      <StartButton
-        onStart={() => {
-          setStartStamp(DateTime.now());
-          setTimerIsRunning(true);
-          //startTimer(DateTime.now(), true);
-        }}
+      <Timer
+        createNewEntry={createNewEntry}
+        notes={notes}
+        projectName={projectName}
       />
+      
+      <StartButton onStart={() => /*props.startTimer()*/} />
 
-      <StopButton
-        onStop={() => {
-          if (startStamp && timerIsRunning) {
-            //nur ausführen wenn startstamp neu bzw aktuell ist
-            setTimerIsRunning(false);
-            const stopStamp = DateTime.now();
-            const difference = stopStamp.diff(startStamp);
-            const newTime = difference.valueOf();
-            setElapsedTimeMillisec(newTime);
-            createNewEntry(newTime, startStamp, stopStamp, projectName, notes);
-          } else {
-            alert(
-              "Der Timer kann ohne das Starten des Timers nicht beendet werden"
-            );
-          }
-        }}
-      />
+      <StopButton onStop={() => /*props.stopTimer()*/} />
 
-      <ResetButton
-        onReset={() => {
-          setStartStamp(null);
-          alert(
-            "StartStamp wurde zurückgesetzt vorausgesetzt, du hast ihn noch nicht mit Stopp gespeichert"
-          );
-        }}
-      />
+      <ResetButton onReset={() => alert("fix props")/*props.resetTimer()*/} />
     </div>
-  );
+  ); 
 };

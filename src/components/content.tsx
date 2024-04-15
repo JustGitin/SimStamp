@@ -1,9 +1,10 @@
 import { Clock } from "./Clock.tsx";
 import { TimeEntryTable } from "./timeEntryTable.tsx";
 import "./content.css";
-import { Actions } from "./actions.tsx";
 import { TimeEntry, dummyTimeEntries } from "./dummyEntries.ts";
 import { useState } from "react";
+import { Timer } from "./Timer.tsx";
+import { Actions } from "./actions.tsx";
 
 export const Content = () => {
   const [timeEntryArray, setTimeEntrieArray] =
@@ -20,6 +21,7 @@ export const Content = () => {
       <div className="bottomRow">
         <Clock />
         <Actions onNewTimeEntry={onNewTimeEntry} />
+        <Timer />
       </div>
     </div>
   );

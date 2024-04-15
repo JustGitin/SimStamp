@@ -1,46 +1,86 @@
-import { useEffect, useState } from "react";
-import "./timer.css";
 import { DateTime, Duration } from "luxon";
+import React, { useState, useEffect, useRef } from "react";
+import { Actions } from "./actions";
+interface TimerProps {
+  notes: string;
+  projectName: string;
 
-interface MyTimerProps {
-  startStamp: DateTime;
+  createNewEntry: (
+    displayElapsedTime: number,
+    startStamp: DateTime,
+    stopStamp: DateTime,
+    projectName: string,
+    notes: string
+  ) => void;
 }
 
-export const Timer: React.FC<MyTimerProps> = (props) => {
-  const [elapsedTime, setElapsedTime] = useState<Duration>(
-    Duration.fromMillis(0)
-  );
-  const [displayElapsedTime, setDisplayElapsedTime] = useState<string>("0:0:0");
+export const Timer: React.FC<TimerProps> = (props) => {
+  const [isRunning, setIsRunning] = useState(false);
+  const intervalRef = useRef<NodeJS.Timeout | null>(null);
+  const [elapsedTimeMillisec, setElapsedTimeMillisec] = useState<number>(0);
+  const [startStamp, setStartStamp] = useState<DateTime | null>(null);
 
   useEffect(() => {
-    const fetchData = () => {
-      const intervalId = setInterval(() => {
-        const now = DateTime.now();
-        const difference = now.diff(props.startStamp);
-        setElapsedTime(difference); //falls undefined
-      }, 500);
-      return () => clearInterval(intervalId);
+    return () => {
+      //retunt einmalig die Aufräumfunktion
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current);
+      }
     };
+  }, []);
 
-    return fetchData(); //kann ich aufrufen um die elapsedTime zu entnehmen!
-  }, [props.startStamp]); //erst nach erhalt des StartStamps wird das Interval aufgerufen
+  const startTimer = () => {
+    if (!isRunning) {
+      //verhindert das mehrfache Starten des Timers
+      const currentDateTime = DateTime.now();
+      setStartStamp(currentDateTime);
+      setIsRunning(true);
+      intervalRef.current = setInterval(() => {
+        const now = DateTime.now();
+        const stampDifference: Duration = now.diff(currentDateTime);
+        const newTimeMillisec = stampDifference.valueOf();
+        setElapsedTimeMillisec(newTimeMillisec);
 
-  useEffect(() => {
-    setDisplayElapsedTime(formatDuration(elapsedTime));
-  }, [elapsedTime]);
+        //Das Problem ist dass Startstamp nicht rechzeitig gesetzt wird bevor die Differenz berechnet wird.
+        //ich weiß noch nicht wie ich in die Data nachträglich pushen kann, sodass der Eintrag mit der laufenden Zeit nachträglich erfasst werden kann
+      }, 500);
+    }
+  };
 
-  function formatDuration(elapsedTime: Duration): string {
-    return `${Math.floor(elapsedTime.as("hours"))}:${elapsedTime.toFormat(
-      //hier nochmal in Luxon nachschauen, vermutlich nicht die beste Lösung auf diese weises
-      "mm:ss"
-    )}`;
-  }
+  const stopTimer = () => {
+    if (isRunning && startStamp != null) {
+      setIsRunning(false);
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current);
+      }
+      const stopStamp = DateTime.now();
+      props.createNewEntry(
+        elapsedTimeMillisec,
+        startStamp,
+        stopStamp,
+        props.projectName,
+        props.notes
+      );
+    } else {
+      alert("Der Timer kann ohne das Starten des Timers nicht beendet werden");
+    }
+  };
 
-  return displayElapsedTime;
+  const resetTimer = () => {
+    if (intervalRef.current) {
+      clearInterval(intervalRef.current);
+    }
+    setStartStamp(null);
+    setIsRunning(false);
+  };
+
+  return (
+    <div>
+      {/* <Actions                
+        startTimer={startTimer}
+        stopTimer={stopTimer}
+        resetTimer={resetTimer}
+      /> */}
+    </div>
+  );
 };
-
-//problem ist die asyncrone abfrage der Zeit, Timer muss von Buttons aufgerufen werden können und den StartStamp nur beim ersten rendern setzen
-//eine Komponente daraus machen sodass die eine für das anzeigen der vergangenen zeit seit dem setzen des Simstamps verantwortlich ist und beim
-//Stoppen das intervall unterbricht sowie die Duration abspeichert sodass beim erneuten Starten des Timers da angefangen werden kann wo letztes mal
-//gestoppt wurden oder beim neu anlegen einer Spalte mit einem Neuen timer das derzeitige Reset durchgeführt werden soll was lediglich einen neuen
-//StartStamp hineingibt. Dieser Knopf soll ja durch den Hinzufügebutton eines neuen zeiteneintrags ersetzt werden
