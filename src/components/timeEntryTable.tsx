@@ -1,6 +1,5 @@
 import DataGrid, {
   Column,
-  DataGridTypes,
   Editing,
   FilterRow,
   HeaderFilter,
@@ -21,7 +20,6 @@ interface TimeEntryTableProps {
 function formatDuration(milliseconds: number): string {
   const formattedDuration =
     Duration.fromMillis(milliseconds).toFormat("hh:mm:ss");
-  console.log("Danach" + formattedDuration);
   return formattedDuration;
 }
 
@@ -43,7 +41,6 @@ export const TimeEntryTable = (props: TimeEntryTableProps) => {
   return (
     <div className="time-entry-table-container">
       <DataGrid
-        id="gridContainer"
         dataSource={props.timeEntries}
         keyExpr="ID"
         showBorders={true}
@@ -57,6 +54,7 @@ export const TimeEntryTable = (props: TimeEntryTableProps) => {
         </Column>
         <Column
           caption="Vergangene Zeit"
+          dataField="VergangeneZeit"
           dataType="number"
           alignment="center"
           cellRender={(data) => renderTimeOutput(data)}
@@ -89,9 +87,12 @@ export const TimeEntryTable = (props: TimeEntryTableProps) => {
         </Column>
         <Summary>
           <TotalItem
-            column="Vergangene Zeit"
+            column="VergangeneZeit"
             summaryType="sum"
-            valueFormat={formatDuration}
+            valueFormat={(totalDuration: number) => {
+              console.log(totalDuration);
+              return formatDuration(totalDuration);
+            }}
             alignment="center"
           />
         </Summary>
