@@ -1,5 +1,6 @@
 import DataGrid, {
   Column,
+  DataGridTypes,
   Editing,
   FilterRow,
   HeaderFilter,
@@ -9,34 +10,44 @@ import DataGrid, {
   TotalItem,
 } from "devextreme-react/data-grid";
 import "./timeEntryTable.css";
-import { TimeEntry } from "./dummyEntries"; //ist nur das interface
+import { TimeEntryProps } from "./dummyEntries.ts"; //just interface
 import { DateTime, Duration } from "luxon";
+import { Timer } from "./Timer.tsx";
 
 interface TimeEntryTableProps {
-  timeEntries: TimeEntry[];
+  timeEntries: TimeEntryProps[];
+}
+
+function formatDuration(milliseconds: number): string {
+  const formattedDuration =
+    Duration.fromMillis(milliseconds).toFormat("hh:mm:ss");
+  console.log("Danach" + formattedDuration);
+  return formattedDuration;
 }
 
 export const TimeEntryTable = (props: TimeEntryTableProps) => {
-  const calculateCellValue = (rowData: TimeEntry) => {
-    const stopStamp = DateTime.fromISO(rowData.EndUhrzeit).toMillis();
-    const startStamp = DateTime.fromISO(rowData.StartUhrzeit).toMillis();
-    const difference = stopStamp - startStamp;
-    //new Date(rowData.EndUhrzeit).getTime(); //Standard Javascript
-    return difference;
+  const renderTimeOutput = (data: {
+    data: { StartUhrzeit: string; EndUhrzeit: string | null };
+  }) => {
+    const start = DateTime.fromISO(data.data.StartUhrzeit);
+    const end =
+      data.data.EndUhrzeit == null
+        ? null
+        : DateTime.fromISO(data.data.EndUhrzeit);
+    return end == null ? (
+      <Timer start={start} />
+    ) : (
+      formatDuration(end.diff(start).valueOf())
+    );
   };
-  function formatDuration(milliseconds: number): string {
-    const duration = Duration.fromMillis(milliseconds);
-    const formattedDuration = duration.toFormat("hh:mm:ss"); // darf nicht zum String, muss Zwischenfromatiert werden
-    return formattedDuration;
-  }
-
   return (
     <div className="time-entry-table-container">
       <DataGrid
+        id="gridContainer"
         dataSource={props.timeEntries}
         keyExpr="ID"
         showBorders={true}
-        height="600px" // Hier die gewünschte Höhe einstellen
+        height="600px"
       >
         <FilterRow visible={true} />
         <HeaderFilter visible={true} />
@@ -48,11 +59,8 @@ export const TimeEntryTable = (props: TimeEntryTableProps) => {
           caption="Vergangene Zeit"
           dataType="number"
           alignment="center"
-          calculateCellValue={calculateCellValue}
-          cellRender={(data) => formatDuration(data.value)}
-        >
-          <RequiredRule />
-        </Column>
+          cellRender={(data) => renderTimeOutput(data)}
+        ></Column>
         <Column
           dataField="StartUhrzeit"
           dataType="datetime"
@@ -81,7 +89,7 @@ export const TimeEntryTable = (props: TimeEntryTableProps) => {
         </Column>
         <Summary>
           <TotalItem
-            column="VergangeneZeit"
+            column="Vergangene Zeit"
             summaryType="sum"
             valueFormat={formatDuration}
             alignment="center"

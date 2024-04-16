@@ -1,27 +1,21 @@
 import "./actions.css";
-import { StopButton } from "./stopButton.tsx";
-import { StartButton } from "./startButton.tsx";
-import { ResetButton } from "./resetButton.tsx";
+import { StopButton } from "./StopButton.tsx";
+import { StartButton } from "./StartButton.tsx";
+import { ResetButton } from "./ResetButton.tsx";
 import { DateTime } from "luxon";
-import { TimeEntry } from "./dummyEntries.ts";
-import { Timer } from "./Timer.tsx";
+import { TimeEntryProps } from "./dummyEntries.ts";
 
 export interface ActionProps {
-  onNewTimeEntry: (newTimeEntry: TimeEntry) => void;
-  // startTimer: () => void;
-  // stopTimer: () => void;
-  // resetTimer: () => void;
+  onNewTimeEntry: (newTimeEntry: TimeEntryProps) => void;
+  onStart: () => void;
+  onStop: () => void;
+  onReset: () => void;
+  start: DateTime | null;
 }
 
 export const Actions = (props: ActionProps) => {
   const notes = "Hallo, ich bin eine Notiz";
   const projectName = "SimStamp";
-
-  // function formatDuration(milliseconds: number): string {
-  //   const duration = Duration.fromMillis(milliseconds);
-  //   const formattedDuration = duration.toFormat("hh:mm:ss");
-  //   return formattedDuration;
-  // }
 
   const createNewEntry = (
     displayElapsedTime: number,
@@ -30,10 +24,9 @@ export const Actions = (props: ActionProps) => {
     projectName: string,
     notes: string
   ) => {
-    const now = DateTime.now(); //currentDate ist das Datum zum Zeitpunkt des Eintrags
-    const currentDate: string = now.toISODate();
+    const currentDate: string = DateTime.now().toISODate(); //currentDate=time of entry
 
-    const newTimeEntry: TimeEntry = {
+    const newTimeEntry: TimeEntryProps = {
       ID: 0,
       Datum: currentDate,
       VergangeneZeit: displayElapsedTime,
@@ -43,24 +36,42 @@ export const Actions = (props: ActionProps) => {
       Notizen: notes,
     };
 
-    props.onNewTimeEntry(newTimeEntry); //erstellt den Eintrag mit der Funktion aus Content
-    console.log("Eintrag wurde gemacht");
+    props.onNewTimeEntry(newTimeEntry); //Content.props
+    console.log("entry was made");
   };
 
   return (
-    
     <div className="button-container">
-      <Timer
-        createNewEntry={createNewEntry}
-        notes={notes}
-        projectName={projectName}
+      <StartButton
+        onStart={() => {
+          props.onStart();
+        }}
       />
-      
-      <StartButton onStart={() => /*props.startTimer()*/} />
-
-      <StopButton onStop={() => /*props.stopTimer()*/} />
-
-      <ResetButton onReset={() => alert("fix props")/*props.resetTimer()*/} />
+      <StopButton
+        onStop={() => {
+          props.onStop();
+          if (props.start) {
+            const stopStamp = DateTime.now();
+            const difference = stopStamp.diff(props.start).valueOf();
+            createNewEntry(
+              difference,
+              props.start,
+              stopStamp,
+              projectName,
+              notes
+            );
+          } else {
+            alert(
+              "Der Timer kann ohne das starten des Timers nicht beendet werden"
+            );
+          }
+        }}
+      />
+      <ResetButton
+        onReset={() => {
+          props.onReset();
+        }}
+      />
     </div>
-  ); 
+  );
 };

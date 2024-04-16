@@ -1,4 +1,4 @@
-export interface TimeEntry {
+export interface TimeEntryProps {
   ID: number;
   Datum: string;
   VergangeneZeit: number;
@@ -11,7 +11,7 @@ export const dummyTimeEntries = [
   {
     ID: 1,
     Datum: "2024-03-29",
-    VergangeneZeit: 13435645, //in Milisekunden
+    VergangeneZeit: 13435645, //milliseconds
     StartUhrzeit: "2024-03-29T11:35",
     EndUhrzeit: "2024-03-29T12:46",
     Projekt: "Projekt A",
