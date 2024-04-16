@@ -12,9 +12,14 @@ export const Content = () => {
     useState<TimeEntryProps[]>(dummyTimeEntries);
 
   const onNewTimeEntry = (newTimeEntry: TimeEntryProps) => {
-    const newEntryID = timeEntryArray[timeEntryArray.length - 1].ID + 1;
-    newTimeEntry.ID = newEntryID;
-    setTimeEntrieArray([...timeEntryArray, newTimeEntry]);
+    if (timeEntryArray.length != 0) {
+      const newEntryID = timeEntryArray[timeEntryArray.length - 1].ID + 1;
+      newTimeEntry.ID = newEntryID;
+      setTimeEntrieArray([...timeEntryArray, newTimeEntry]);
+    } else {
+      newTimeEntry.ID = 1;
+      setTimeEntrieArray([newTimeEntry]);
+    }
   };
   const [start, setStart] = useState<DateTime | null>(null);
 

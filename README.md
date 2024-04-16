@@ -27,22 +27,15 @@ If you are developing a production application, we recommend updating the config
 - Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
 
 
-## Ideas and features that are still open or do not currently work
+## Features that are still open or do not currently work
+-Sortierung nach vergangener Zeit
 
-- Der Timer welcher die vergangene Zeit errechnet soll in der Tabelle in der untersten Spalte angezeigt werden und an dem Eintrag angebunden werden. Meine Idee wäre es diese vergangene Zeit an die newEntryID anzuhängen.
-- Dieser Timer hat funktioniert seit dem hinzufügen des States für die Tabelle nicht mehr ordnungsgemäß und zeigt durations wie 0:126:33 an (State ist nur die Vermutung)
-- Die Vergangene Zeit welche aus dem startStamp und dem stopStamp berechnet wird und anschließend in der Tabelle angezeigt wird eintspricht nicht der tatsächlich vergagenen Zeit(rechnet vielleicht mit dem zu beginn initialisierten Wert oder wird von einem anderen Stempel überschrieben)
 
 ## Ideas for changes
-- Der Eintrag soll schon beim Starten gemacht werden, jedoch wird hier noch kein StopStamp angezeigt sondern ein "waiting for submission", welcher beim stoppen nachgetragen wird. 
-- Der Timer soll in der Spalte "Vergangene Zeit" nach anklicken des Startbuttons hochzählen und beim Stoppen einen Staatischen Eintrag hinterlassen. 
-- Zeiten sollten auch zwischen den Einträgen getrackt werden bzw beim stoppen soll der nächste Timer bereits beginnen zu laufen
-   
 
-Zeitenkonto das plus und minus Stunden trackt und diese ebenfalls ausgibt, sodass man angeben kannn wie viele stunden am Tag oder in der Woche man arbeiten möchte und wie viel man tatsächlich noch offen hat
-
-Wenn ich nach der Vergangenen Zeit filtern möchte, werden mir nur die Millisekunden angezeigt bzw. die formatierung greift nicht
-Nachtragen der Zeiteinträge berechnet nicht die vergangene Zeit sondern lässt beliebige Millisekundenwerte eintragen
-Filter müssen eingegrenzt werden da man bei der StartUhrzeit auch das Datum auswählen kann was separat angezeigt wird
-Sobald ein Eintrag gemacht wurde, soll die Tabelle zu diesem Eintrag springen
-Zeiten werden nach Datum welches angegängt ist sortiert
+- Zeitenkonto /überstunden und minusstunden/
+- Nachtragen der Zeiteinträge berechnet nicht die vergangene Zeit sondern lässt beliebige Werte eintragen
+- Filter eingegrenzen /StartUhrzeit noch mit Datum/
+- Sobald ein Eintrag gemacht wurde, soll die Tabelle zu diesem Eintrag springen
+- Zeiten werden nach Datum angehängtem Datum sortiert
+- Bild mit Usernamen in den Dropdownbutton
