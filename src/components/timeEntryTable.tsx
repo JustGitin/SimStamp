@@ -9,7 +9,7 @@ import DataGrid, {
   TotalItem,
 } from "devextreme-react/data-grid";
 import "./timeEntryTable.css";
-import { TimeEntryProps } from "./dummyEntries.ts"; //just interface
+import { TimeEntryProps } from "./dummyEntries.ts";
 import { DateTime, Duration } from "luxon";
 import { Timer } from "./Timer.tsx";
 
@@ -38,6 +38,7 @@ export const TimeEntryTable = (props: TimeEntryTableProps) => {
       formatDuration(end.diff(start).valueOf())
     );
   };
+
   return (
     <div className="time-entry-table-container">
       <DataGrid
@@ -45,6 +46,7 @@ export const TimeEntryTable = (props: TimeEntryTableProps) => {
         keyExpr="ID"
         showBorders={true}
         height="600px"
+        rowAlternationEnabled={true}
       >
         <FilterRow visible={true} />
         <HeaderFilter visible={true} />
@@ -79,18 +81,13 @@ export const TimeEntryTable = (props: TimeEntryTableProps) => {
         >
           <RequiredRule />
         </Column>
-        <Column dataField="Projekt" alignment="center">
-          <RequiredRule />
-        </Column>
-        <Column dataField="Notizen" alignment="center">
-          <RequiredRule />
-        </Column>
+        <Column dataField="Projekt" alignment="center"></Column>
+        <Column dataField="Notizen" alignment="center"></Column>
         <Summary>
           <TotalItem
             column="VergangeneZeit"
             summaryType="sum"
             valueFormat={(totalDuration: number) => {
-              console.log(totalDuration);
               return formatDuration(totalDuration);
             }}
             alignment="center"

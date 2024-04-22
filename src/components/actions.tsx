@@ -4,6 +4,8 @@ import { StartButton } from "./StartButton.tsx";
 import { ResetButton } from "./ResetButton.tsx";
 import { DateTime } from "luxon";
 import { TimeEntryProps } from "./dummyEntries.ts";
+import { useState } from "react";
+import { confirm } from "devextreme/ui/dialog";
 
 export interface ActionProps {
   onNewTimeEntry: (newTimeEntry: TimeEntryProps) => void;
@@ -14,6 +16,7 @@ export interface ActionProps {
 }
 
 export const Actions = (props: ActionProps) => {
+  const [isButtonDisabled, setIsButtonDisabled] = useState(true);
   const notes = "Hallo, ich bin eine Notiz";
   const projectName = "SimStamp";
 
@@ -24,7 +27,7 @@ export const Actions = (props: ActionProps) => {
     projectName: string,
     notes: string
   ) => {
-    const currentDate: string = DateTime.now().toISODate(); //currentDate=time of entry
+    const currentDate: string = DateTime.now().toISODate();
 
     const newTimeEntry: TimeEntryProps = {
       ID: 0,
@@ -36,7 +39,7 @@ export const Actions = (props: ActionProps) => {
       Notizen: notes,
     };
 
-    props.onNewTimeEntry(newTimeEntry); //Content.props
+    props.onNewTimeEntry(newTimeEntry);
     console.log("entry was made");
   };
 
@@ -44,13 +47,17 @@ export const Actions = (props: ActionProps) => {
     <div className="button-container">
       <StartButton
         onStart={() => {
-          props.onStart();
+          if (!props.start) {
+            setIsButtonDisabled(false);
+            props.onStart();
+          }
         }}
       />
       <StopButton
         onStop={() => {
           props.onStop();
           if (props.start) {
+            setIsButtonDisabled(true);
             const stopStamp = DateTime.now();
             const difference = stopStamp.diff(props.start).valueOf();
             createNewEntry(
@@ -61,15 +68,21 @@ export const Actions = (props: ActionProps) => {
               notes
             );
           } else {
-            alert(
-              "Der Timer kann ohne das starten des Timers nicht beendet werden"
-            );
+            console.log("No running timer detected");
           }
         }}
       />
       <ResetButton
-        onReset={() => {
-          props.onReset();
+        isButtonVisible={isButtonDisabled}
+        onReset={async () => {
+          const result = await confirm(
+            "<i>Bist du dir sicher? <br> Deine aufgezeichnete geht verloren</i>",
+            "Confirm changes"
+          );
+          if (props.start && result == true) {
+            setIsButtonDisabled(true);
+            props.onReset();
+          }
         }}
       />
     </div>

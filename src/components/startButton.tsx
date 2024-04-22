@@ -14,6 +14,7 @@ export const StartButton: React.FC<StartButtonProps> = (props) => {
       onClick={handleClick}
       text="Start"
       type="default"
+      icon="runner"
     ></Button>
   );
 };

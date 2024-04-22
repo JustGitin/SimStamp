@@ -28,7 +28,8 @@ If you are developing a production application, we recommend updating the config
 
 
 ## Features that are still open or do not currently work
--Sortierung nach vergangener Zeit
+- Das Datum soll wie auch die Vergangene Zeit aus den Spalteneinträgen berechnet werden
+- Sortierung nach vergangener Zeit
 
 
 ## Ideas for changes
@@ -39,3 +40,8 @@ If you are developing a production application, we recommend updating the config
 - Sobald ein Eintrag gemacht wurde, soll die Tabelle zu diesem Eintrag springen
 - Zeiten werden nach Datum angehängtem Datum sortiert
 - Bild mit Usernamen in den Dropdownbutton
+- Das Datum soll anhand der Startuhrzeit von selbst ausgelesen werden
+
+
+
+Wie kommuniziert die Tabelle mit den Daten 

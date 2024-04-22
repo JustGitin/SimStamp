@@ -3,7 +3,6 @@ import { DateTime } from "luxon";
 import "./clock.css";
 
 export const Clock = () => {
-  //hält currentDateTime aktuell
   const [currentDateTime, setCurrentDateTime] = useState(DateTime.now());
   useEffect(() => {
     const intervalId = setInterval(() => {

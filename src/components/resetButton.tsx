@@ -2,6 +2,7 @@ import { Button } from "devextreme-react";
 
 interface ResetButtonProps {
   onReset: () => void;
+  isButtonVisible: boolean;
 }
 
 export const ResetButton: React.FC<ResetButtonProps> = (props) => {
@@ -14,6 +15,7 @@ export const ResetButton: React.FC<ResetButtonProps> = (props) => {
       onClick={handleClick}
       text="Reset"
       type="danger"
+      disabled={props.isButtonVisible}
     ></Button>
   );
 };
