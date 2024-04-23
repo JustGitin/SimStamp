@@ -3,12 +3,12 @@ import { StopButton } from "./StopButton.tsx";
 import { StartButton } from "./StartButton.tsx";
 import { ResetButton } from "./ResetButton.tsx";
 import { DateTime } from "luxon";
-import { TimeEntryProps } from "./dummyEntries.ts";
+import { TimeEntry } from "./DummyEntries.ts";
 import { useState } from "react";
 import { confirm } from "devextreme/ui/dialog";
 
 export interface ActionProps {
-  onNewTimeEntry: (newTimeEntry: TimeEntryProps) => void;
+  onNewTimeEntry: (newTimeEntry: TimeEntry) => void;
   onStart: () => void;
   onStop: () => void;
   onReset: () => void;
@@ -21,22 +21,17 @@ export const Actions = (props: ActionProps) => {
   const projectName = "SimStamp";
 
   const createNewEntry = (
-    displayElapsedTime: number,
     startStamp: DateTime,
     stopStamp: DateTime,
     projectName: string,
     notes: string
   ) => {
-    const currentDate: string = DateTime.now().toISODate();
-
-    const newTimeEntry: TimeEntryProps = {
+    const newTimeEntry: TimeEntry = {
       ID: 0,
-      Datum: currentDate,
-      VergangeneZeit: displayElapsedTime,
-      StartUhrzeit: startStamp.toISO()!,
-      EndUhrzeit: stopStamp.toISO()!,
-      Projekt: projectName,
-      Notizen: notes,
+      StartTime: startStamp.toISO()!,
+      EndTime: stopStamp.toISO()!,
+      Project: projectName,
+      notes: notes,
     };
 
     props.onNewTimeEntry(newTimeEntry);
@@ -59,14 +54,8 @@ export const Actions = (props: ActionProps) => {
           if (props.start) {
             setIsButtonDisabled(true);
             const stopStamp = DateTime.now();
-            const difference = stopStamp.diff(props.start).valueOf();
-            createNewEntry(
-              difference,
-              props.start,
-              stopStamp,
-              projectName,
-              notes
-            );
+
+            createNewEntry(props.start, stopStamp, projectName, notes);
           } else {
             console.log("No running timer detected");
           }

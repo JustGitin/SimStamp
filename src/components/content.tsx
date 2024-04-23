@@ -1,7 +1,7 @@
 import { Clock } from "./Clock.tsx";
 import { TimeEntryTable } from "./TimeEntryTable.tsx";
 import "./content.css";
-import { TimeEntryProps, dummyTimeEntries } from "./dummyEntries.ts";
+import { TimeEntry, dummyTimeEntries } from "./DummyEntries.ts";
 import { useState } from "react";
 import { Timer } from "./Timer.tsx";
 import { Actions } from "./Actions.tsx";
@@ -9,9 +9,9 @@ import { DateTime } from "luxon";
 
 export const Content = () => {
   const [timeEntryArray, setTimeEntrieArray] =
-    useState<TimeEntryProps[]>(dummyTimeEntries);
+    useState<TimeEntry[]>(dummyTimeEntries);
 
-  const onNewTimeEntry = (newTimeEntry: TimeEntryProps) => {
+  const onNewTimeEntry = (newTimeEntry: TimeEntry) => {
     if (timeEntryArray.length != 0) {
       const newEntryID = timeEntryArray[timeEntryArray.length - 1].ID + 1;
       newTimeEntry.ID = newEntryID;

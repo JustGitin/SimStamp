@@ -8,5 +8,12 @@ export const StopButton: React.FC<StopButtonProps> = (props) => {
   const handleClick = () => {
     props.onStop();
   };
-  return <Button onClick={handleClick} text="Stopp" type="default"></Button>;
+  return (
+    <Button
+      onClick={handleClick}
+      text="Stopp"
+      type="default"
+      icon="insertrowbelow"
+    ></Button>
+  );
 };

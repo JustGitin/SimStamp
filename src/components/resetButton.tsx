@@ -15,6 +15,7 @@ export const ResetButton: React.FC<ResetButtonProps> = (props) => {
       onClick={handleClick}
       text="Reset"
       type="danger"
+      icon="trash"
       disabled={props.isButtonVisible}
     ></Button>
   );

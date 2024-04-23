@@ -1,38 +1,36 @@
-export interface TimeEntryProps {
+export interface TimeEntry {
   ID: number;
-  Datum: string;
-  VergangeneZeit: number;
-  StartUhrzeit: string;
-  EndUhrzeit: string;
-  Projekt: string;
-  Notizen: string;
+  StartTime: string;
+  EndTime: string;
+  Project?: string;
+  notes?: string;
 }
-export const dummyTimeEntries = [
+
+export const TimeEntryKeys: Record<string, keyof TimeEntry> = {
+  ID: "ID",
+  START_TIME: "StartTime",
+  END_TIME: "EndTime",
+  PROJECT: "Project",
+  NOTES: "notes",
+} as const;
+
+export const dummyTimeEntries: TimeEntry[] = [
   {
     ID: 1,
-    Datum: "2024-03-29",
-    VergangeneZeit: 13435645,
-    StartUhrzeit: "2024-03-29T11:35",
-    EndUhrzeit: "2024-03-29T12:46",
-    Projekt: "Projekt A",
-    Notizen: "Notizen zu Projekt A",
+    StartTime: "2024-03-29T11:35",
+    EndTime: "2024-03-29T12:46",
   },
   {
     ID: 2,
-    Datum: "2024-03-30",
-    VergangeneZeit: 23445645,
-    StartUhrzeit: "2024-03-30T13:55",
-    EndUhrzeit: "2024-03-30T14:28",
-    Projekt: "Projekt B",
-    Notizen: "Notizen zu Projekt B",
+    StartTime: "2024-03-30T13:55",
+    EndTime: "2024-03-30T14:28",
+    Project: "Projekt B",
+    notes: "Notizen zu Projekt B",
   },
   {
     ID: 3,
-    Datum: "2024-03-31",
-    VergangeneZeit: 3600000,
-    StartUhrzeit: "15:00",
-    EndUhrzeit: "16:00",
-    Projekt: "Projekt C",
-    Notizen: "Notizen zu Projekt C",
+    StartTime: "15:00",
+    EndTime: "16:00",
+    Project: "Projekt C",
   },
 ];

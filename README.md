@@ -42,6 +42,6 @@ If you are developing a production application, we recommend updating the config
 - Bild mit Usernamen in den Dropdownbutton
 - Das Datum soll anhand der Startuhrzeit von selbst ausgelesen werden
 
+- Wenn ich zwei Zeiten Eintrage, soll die vergangene Zeit berechnet werden, wenn ich die vergangene Zeit angebe, dann berechnet er mir den anderen Stempel
 
 
-Wie kommuniziert die Tabelle mit den Daten 
